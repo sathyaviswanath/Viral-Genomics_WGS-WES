@@ -1,0 +1,68 @@
+    1  sudo apt update
+    2  sudo apt upgrade
+    3  sudo apt install fastqc
+    4  sudo apt install bwa
+    5  sudo apt install samtools
+    6  sudo apt install bcftools
+    7  sudo apt install vcftools
+    8  conda install -c bioconda freebayes
+    9  freebayes --version
+   10  mkdir Raw_Data
+   11  mkdir Documentation
+   12  mkdir Outputs
+   13  mkdir Script
+   14  cd ./Raw_Data/
+   15  wget -nc ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR574/003/ERR5743893/ERR5743893_1.fastq.gz
+   16  wget -nc ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR574/003/ERR5743893/ERR5743893_2.fastq.gz
+   17  wget "https://www.ebi.ac.uk/ena/browser/api/fasta/MN908947.3?download=true" -O MN908947.fasta
+   18  cd ..
+   19  fastqc ./Raw_Data/ERR5743893_1.fastq.gz ./Raw_Data/ERR5743893_2.fastq.gz --outdir ./Outputs/
+   20  gunzip ./Raw_Data/ERR5743893_1.fastq.gz ./Raw_Data/ERR5743893_2.fastq.gz
+   21  cd ./Outputs/
+   22  bwa index -p MN908947 ../Raw_Data/MN908947.fasta 
+   23  bwa mem MN908947   ../Raw_Data/ERR5743893_1.fastq   ../Raw_Data/ERR5743893_2.fastq   > ERR5743893.sam
+   24  head -n 5 ./ERR5743893.sam
+   25  samtools view -@ 20 -S -b ERR5743893.sam > ERR5743893.bam
+   26  samtools sort -@ 4 -o ERR5743893.sorted.bam ERR5743893.bam
+   27  samtools index ./ERR5743893.sorted.bam
+   28  samtools faidx MN908947.fasta
+   29  freebayes -f ./MN908947.fasta ./ERR5743893.sorted.bam > ERR5743893.vcf
+   30  history > command.txt
+   31  code Documentation/Project_Overview.md
+   32  cd ../Script/
+   33  code run_Pipeline.sh
+   34  cd ..
+   35  mkdir -p Script
+   36  cd Script
+   37  code run_pipeline.sh
+   38  mkdir -p Script
+   39  cd Script
+   40  code run_pipeline.sh
+   41  git rm --cached Outputs/ERR7543893.sam
+   42  cd ..
+   43  git rm --cached Outputs/ERR7543893.sam
+   44  cd ..
+   45  ls
+   46  git rm --cached Outputs/ERR7543893.sam
+   47  git rm --cached Outputs/ERR5743893.sam
+   48  echo "Outputs/*.sam" >> .gitignore
+   49  git add .gitignore
+   50  git commit -m "Stop tracking large SAM outputs"
+   51  git push origin main
+   52  git rm --cached Raw_Data/ERR7543893_1.fastq 
+   53  git rm --cached Raw_Data/ERR5743893_1.fastq
+   54  git rm --cached Raw_Data/ERR5743893_2.fastq
+   55  .gitignore
+   56  Outputs/*.sam
+   57  echo "Outputs/*.sam" "Raw_Data/*.fastq" >> .gitignore
+   58  git add .gitignore
+   59  git commit -m "Ignore large FASTQ and SAM files"
+   60  git push origin main
+   61  git filter-repo --path Outputs/ERR7543893.sam --invert-paths
+   62  pip install git-filter-repo
+   63  git filter-repo --path Outputs/ERR7543893.sam --invert-paths
+   64  git filter-repo --path Outputs/ERR5743893.sam --invert-paths --force
+   65  git push origin main --force
+   66  git remote add origin https://github.com/sathyaviswanath/Viral-Genomics_WGS-WES.git
+   67  git push origin main --force
+   68  history > command.txt
