@@ -1,9 +1,9 @@
 # **SARS-CoV-2 Viral Genomics Analysis Pipeline**
 
-## 🎯 Project Overview
+## 🎯 Pipeline Overview
 This pipeline analyzes COVID-19 sequencing data (**ERR5743893**) against the Wuhan-Hu-1 reference genome (**MN908947.3**). It performs quality control, read alignment, BAM processing, and variant calling to identify SNPs/indels.[file:1][file:9]
 
-**Pipeline**: FASTQ → FastQC → BWA-MEM → Samtools → Freebayes → VCF
+**Pipeline Workflow Summary**: FASTQ → FastQC → BWA-MEM → Samtools → Freebayes → VCF
 
 ## 🚀 Quick Start
 ## 1. Clone & Setup Environment
@@ -16,10 +16,9 @@ sudo apt update & sudo apt install fastqc bwa samtools bcftools vcftools
 
 conda install -c bioconda freebayes
 
-
 ## 2. Download Data & Run Pipeline
 
-Create directories and download data (see Documentation/Pipeline.md)
+Create directories and download data, see [Documentation/Pipeline.md](Documentation/Pipeline.md)
 
 ## 3. View Results
 
