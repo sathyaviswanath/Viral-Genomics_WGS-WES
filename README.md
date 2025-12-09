@@ -64,7 +64,7 @@ See [Documentation/Troubleshooting.md](Documentation/3.Troubleshooting.md) for:
 - Common issues
 
 ## 📚 References
-- [ENA: ERR5743893](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR574/003/ERR5743893/ERR5743893.fastq.gz)
+- [ENA: ERR5743893](https://www.ebi.ac.uk/ena/browser/view/ERR5743893)
 - [SARS-CoV-2 Reference](https://www.ebi.ac.uk/ena/browser/view/MN908947.3)
 
 
