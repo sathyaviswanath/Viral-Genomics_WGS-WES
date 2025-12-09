@@ -41,8 +41,9 @@ Less Outputs/ERR5743893.vcf
   - `Documentation/` – Detailed docs  
     - `1_Project_Overview.md`  
     - `2_Pipeline.md`  
-  - `Raw_Data/` – FASTQ + reference  
+    - `3_Troubleshooting.md`
   - `Outputs/` – Results (FastQC, BAM, VCF)  
+  - `Raw_Data/` – FASTQ + reference  
   - `Script/` – Automation scripts
 
 
@@ -58,6 +59,8 @@ Less Outputs/ERR5743893.vcf
 See [Documentation/Pipeline.md](Documentation/Pipeline.md) for:
 - Tool explanations (FastQC, BWA, Samtools, BCFtools, Freebayes)
 - Step-by-step commands
+See [Documentation/Troubleshooting.md](Documentation/3.Troubleshooting.md) for:
+- Common issues
 
 ## 📚 References
 - [ENA: ERR5743893](ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR574/003/ERR5743893/)
