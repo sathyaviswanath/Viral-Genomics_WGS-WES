@@ -59,6 +59,7 @@ Less Outputs/ERR5743893.vcf
 See [Documentation/Pipeline.md](Documentation/Pipeline.md) for:
 - Tool explanations (FastQC, BWA, Samtools, BCFtools, Freebayes)
 - Step-by-step commands
+
 See [Documentation/Troubleshooting.md](Documentation/3.Troubleshooting.md) for:
 - Common issues
 
