@@ -8,17 +8,17 @@ This pipeline analyzes COVID-19 sequencing data (**ERR5743893**) against the Wuh
 ## 🚀 Quick Start
 ## 1. Clone & Setup Environment
 
-git clone <https://github.com/sathyaviswanath/Viral-Genomics_WGS-WES.git>
+  git clone <https://github.com/sathyaviswanath/Viral-Genomics_WGS-WES.git>
 
-cd Viral-Genomics_WGS-WES
+  cd Viral-Genomics_WGS-WES
 
-sudo apt update & sudo apt install fastqc bwa samtools bcftools vcftools
+  sudo apt update & sudo apt install fastqc bwa samtools bcftools vcftools
 
-conda install -c bioconda freebayes
+  conda install -c bioconda freebayes
 
 ## 2. Download Data & Run Pipeline
 
-Create directories and download data, see [Documentation/Pipeline.md](Documentation/Pipeline.md)
+Create directories and download data, see [Documentation/Pipeline.md](Documentation/Pipeline.md) & [Script](Script/run_pipeline.sh)
 
 ## 3. View Results
 
@@ -34,20 +34,7 @@ Samtools depth Outputs/ERR5743893.sorted.bam > coverage.txt
 
 Less Outputs/ERR5743893.vcf
 
-## 📁 Directory Structure
-
-- Viral-Genomics_WGS-WES
-  - `README.md` – Quickstart guide
-  - `Documentation/` – Detailed docs  
-    - `1_Project_Overview.md`  
-    - `2_Pipeline.md`  
-    - `3_Troubleshooting.md`
-  - `Outputs/` – Results (FastQC, BAM, VCF)  
-  - `Raw_Data/` – FASTQ + reference  
-  - `Script/` – Automation scripts
-
-
-## 🛠️ Technical Pipeline
+## 🛠️ Technical Pipeline and Tools Explanation
 | Component   | Tool      | Input                      | Output              |
 |-------------|-----------|----------------------------|---------------------|
 | **QC**      | FastQC    | FASTQ.gz (paired-end)      | HTML reports  |
@@ -55,9 +42,51 @@ Less Outputs/ERR5743893.vcf
 | **Processing** | Samtools | SAM/BAM                   | Sorted/indexed BAM  |
 | **Variants** | Freebayes | BAM + Reference           | VCF 4.2 format |
 
-## 📖 Full Documentation
+## Tool Explanations
+### 1. FastQC
+
+**Purpose:** Generates quality control reports for raw sequencing reads, assessing per-base quality, GC content, sequence duplication, and adapter contamination.
+
+- Essential first step to identify data issues before downstream analysis
+
+- Produces HTML reports with summary statistics and graphs​
+
+### 2. BWA (Burrows-Wheeler Aligner)
+
+**Purpose:** Aligns short sequencing reads to a reference genome using the BWA-MEM algorithm optimized for Illumina paired-end reads.
+
+- Handles mismatches, gaps, and complex mapping scenarios efficiently
+
+- Outputs SAM format with alignment coordinates and mapping quality scores​
+
+### 3. Samtools(Software Asset Management Tools)
+
+**Purpose:** Suite of utilities for manipulating SAM/BAM files and reference genomes.
+
+- Converts formats (SAM↔BAM), sorts alignments, indexes files for fast access
+
+- faidx creates random access indexes for FASTA files used in variant calling​
+
+### 4. Freebayes
+
+**Purpose:** Haplotype-based variant caller for discovering SNPs and indels from BAM alignments.
+
+- Population genetics model considers allele frequencies and mapping quality
+
+- Installed via Bioconda for compatibility with bioinformatics environments.
+
+### 5. BCFtools
+
+**Purpose:** High-performance toolkit for manipulation and analysis of VCF/BCF variant files.
+
+- Filters variants by quality, depth, allele frequency (bcftools view -i 'QUAL>20')
+
+- Merges multiple VCFs, generates summaries, and performs statistical analysis
+
+- Essential for post-variant calling processing and quality control of Freebayes output
+
+## 📖 Documentation
 See [Documentation/Pipeline.md](Documentation/Pipeline.md) for:
-- Tool explanations (FastQC, BWA, Samtools, BCFtools, Freebayes)
 - Step-by-step commands
 
 See [Documentation/Troubleshooting.md](Documentation/3.Troubleshooting.md) for:
